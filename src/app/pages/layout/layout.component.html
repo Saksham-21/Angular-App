@@ -1,0 +1,19 @@
+<aside class="sidebar" id="sidebar">
+    <div class="logo">
+        <h2>Fit Track</h2>
+        <button class="toggle-btn" id="toggle-btn"><fa-icon [icon]="faBars" (click)="toggleFunction()"></fa-icon></button>
+    </div>
+    <ul class="nav-menu">
+        <li class="nav-item"><a routerLink="/home" class="nav-link"><fa-icon [icon]="faHome"></fa-icon><span>Home</span></a>
+        </li>
+        <li class="nav-item"><a routerLink="/program" class="nav-link"><fa-icon [icon]="faDumbbell"></fa-icon><span>Program</span></a></li>
+        <li class="nav-item"><a routerLink="/community" class="nav-link"><fa-icon [icon]="faUsers"></fa-icon><span>Community</span></a></li>
+        <li class="nav-item"><a routerLink="/goals" class="nav-link"><fa-icon [icon]="faBullseye"></fa-icon><span>Goals</span></a></li>
+        <li class="nav-item"><a routerLink="/dashboard" class="nav-link"><fa-icon [icon]="faChartLine"></fa-icon><span>Dashboard</span></a></li>
+        <li class="nav-item"><a routerLink="/chatassistant" class="nav-link"><fa-icon [icon]="faRobot"></fa-icon><span>Chat
+                    Assistant</span></a></li>
+    </ul>
+</aside>
+<div class="content" id="content">
+    <router-outlet></router-outlet>
+</div>

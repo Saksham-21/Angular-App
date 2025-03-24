@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="register-card">
+        <h2>Create an Account</h2>
+        <form id="registerForm">
+            <div class="name-fields">
+                <div class="input-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="input-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="role-selection">
+                <label>Register as:</label>
+                <div class="role-options">
+                    <div class="role-option">
+                        <input type="radio" id="user" name="role" value="user" checked>
+                        <label for="user">User</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="trainer" name="role" value="trainer">
+                        <label for="trainer">Trainer</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a routerLink="/login">Login here</a>
+        </div>
+    </div>
+</div>
