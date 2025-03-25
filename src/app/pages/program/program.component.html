@@ -1,1 +1,48 @@
-<p>program works!</p>
+<div class="main" [ngClass]="{'full-width': userRole === 'user'}">
+    <div class="left-side">
+        <div class="heading">
+            <h2>PROGRAMS LISTINGS</h2>
+        </div>
+        <div class="program-content">
+            <div *ngFor="let program of programs" class="program-item" (click)="toggleSessions(program.id)">
+                <h3>{{ program.title }}</h3>
+                <p>{{ program.description }}</p>
+
+                <div *ngIf="expandedProgramId === program.id">
+                    <div *ngFor="let session of sessions" class="session-item">
+                        <p>Session Date: {{ session.date }}</p>
+
+                        <button class="book-btn" *ngIf="userRole === 'user'" [disabled]="isSessionBooked(session.id)"
+                            (click)="bookSession(session.id)">
+                            {{ isSessionBooked(session.id) ? 'Already Booked' : 'Book/Submit' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side" *ngIf="userRole !== 'user'">
+        <button (click)="toggleCreateMode()">Create Program</button>
+
+        <div *ngIf="isCreating">
+            <h3>Create New Program</h3>
+            <input type="text" [(ngModel)]="newProgram.title" placeholder="Title">
+            <input type="text" [(ngModel)]="newProgram.description" placeholder="Description">
+            <button (click)="createProgram()">Submit</button>
+        </div>
+
+        <h3>Your Programs</h3>
+        <div *ngFor="let program of programs">
+            <h4>{{ program.title }}</h4>
+            <button (click)="editProgram(program)">Edit</button>
+        </div>
+
+        <div *ngIf="isEditing">
+            <h3>Edit Program</h3>
+            <input type="text" [(ngModel)]="editProgramData.title" placeholder="Title">
+            <input type="text" [(ngModel)]="editProgramData.description" placeholder="Description">
+            <button (click)="saveProgram()">Save</button>
+        </div>
+    </div>
+</div>

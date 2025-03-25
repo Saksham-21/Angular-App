@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faDumbbell,faUsers,faHome,faBullseye,faChartLine,faRobot,faBars} from '@fortawesome/free-solid-svg-icons';
+import { faDumbbell,faUsers,faHome,faBullseye,faChartLine,faRobot,faBars,faSearch,faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +15,9 @@ export class LayoutComponent {
   faHome=faHome;
   faBullseye=faBullseye;
   faChartLine=faChartLine;
+  faUser=faUser;
   faRobot=faRobot; 
+  faSearch=faSearch
   faBars=faBars;
   toggleBtn: HTMLElement | null = document.getElementById('toggle-btn');
 
@@ -33,13 +35,15 @@ export class LayoutComponent {
   //       }
   //   });
   // }
+  isCollapsed = false;
   toggleFunction() {
+    this.isCollapsed = !this.isCollapsed;
     const sidebar = document.getElementById('sidebar');
-    const content = document.getElementById('content');
+    const content = document.getElementById('main-content');
     
     if (sidebar && content) {
-      sidebar.classList.toggle('collapsed');
-      content.classList.toggle('expanded');
+      sidebar.classList.toggle('collapsed', this.isCollapsed);
+      content.classList.toggle('expanded', this.isCollapsed);
     }
   }
 }
