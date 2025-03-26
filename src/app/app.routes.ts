@@ -8,6 +8,9 @@ import { GoalsComponent } from './pages/goals/goals.component';
 import { ProgramComponent } from './pages/program/program.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { DietplanBotComponent } from './pages/dietplan-bot/dietplan-bot.component';
+import { NutritionadviceBotComponent } from './pages/nutritionadvice-bot/nutritionadvice-bot.component';
+import { ChatBotComponent } from './pages/chat-bot/chat-bot.component';
 
 export const routes: Routes = [
     {
@@ -37,7 +40,20 @@ export const routes: Routes = [
             },
             {
                 path:'chatassistant',
-                component:ChatAssistantComponent
+                component:ChatAssistantComponent,
+                
+            },
+            {
+                path:'dietplanbot',
+                component:DietplanBotComponent,
+            },
+            {
+                path:'nutritionadvicebot',
+                component:NutritionadviceBotComponent,
+            },
+            {
+                path:'chatbot',
+                component:ChatBotComponent,
             },
             {
                 path:'community',

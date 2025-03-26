@@ -1,0 +1,31 @@
+<div class="main">
+    <div class="left-side">
+        hvjbkbknllnlln
+    </div>
+    <div class="chat-container">
+        <div class="chat-box">
+            <div *ngIf="showGuidelines" class="guidelines">
+                <h3>Welcome to DietPlan Bot!</h3>
+                <p>⚡ Ask anything about diet plans</p>
+                <p>🍎 Get nutritional advice</p>
+                <p>🥗 Personalized meal suggestions</p>
+                <p>💬 Type your query below to start!</p>
+            </div>
+            <div *ngFor="let msg of messages">
+                <div class="message user" *ngIf="msg.type === 'user'">{{ msg.text }}</div>
+                <div class="message bot" *ngIf="msg.type === 'bot'">
+                    <ng-container *ngIf="!msg.isTyping">{{ msg.text }}</ng-container>
+                    <span class="typing-dots" *ngIf="msg.isTyping">...</span>
+                </div>
+                <div class="separator" *ngIf="msg.type === 'separator'"></div>
+            </div>
+
+            <div class="message loading" *ngIf="loading">Thinking...</div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" [(ngModel)]="userInput" placeholder="Ask me anything..." (keyup.enter)="sendMessage()">
+            <button (click)="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
