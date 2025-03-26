@@ -1,7 +1,7 @@
 <div class="main" [ngClass]="{'full-width': userRole === 'user'}">
     <div class="left-side">
         <div class="heading">
-            <h2>PROGRAMS LISTINGS</h2>
+            <h2>PROGRAM LISTINGS</h2>
         </div>
         <div class="program-content">
             <div *ngFor="let program of programs" class="program-item" (click)="toggleSessions(program.id)">
@@ -9,19 +9,35 @@
                 <p>{{ program.description }}</p>
 
                 <div *ngIf="expandedProgramId === program.id">
-                    <div *ngFor="let session of sessions" class="session-item">
-                        <p>Session Date: {{ session.date }}</p>
+                    <div *ngIf="sessions.length > 0; else noSessions">
+                        <div *ngFor="let session of sessions" class="session-item">
+                            <p>Session Date: {{ session.date }}</p>
 
-                        <button class="book-btn" *ngIf="userRole === 'user'" [disabled]="isSessionBooked(session.id)"
-                            (click)="bookSession(session.id)">
-                            {{ isSessionBooked(session.id) ? 'Already Booked' : 'Book/Submit' }}
-                        </button>
+                            <!-- Booking Button for Users -->
+                            <button class="book-btn" *ngIf="userRole === 'user'"
+                                [disabled]="isSessionBooked(session.id)" (click)="bookSession(session.id)">
+                                {{ isSessionBooked(session.id) ? 'Already Booked' : 'Book/Submit' }}
+                            </button>
+
+                            <!-- Update & Delete for Trainers/Admins -->
+                            <div *ngIf="userRole !== 'user'" class="session-actions">
+                                <input type="datetime-local" [(ngModel)]="session.updatedDate" (click)="$event.stopPropagation()">
+                                <button class="update-btn"
+                                    (click)="updateSession(session.id, session.updatedDate, program.id)">Update</button>
+                                <button class="delete-btn"
+                                    (click)="deleteSession(session.id, program.id)">Delete</button>
+                            </div>
+                        </div>
                     </div>
+                    <ng-template #noSessions>
+                        <p>No sessions available for this program.</p>
+                    </ng-template>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Right Side - Program Management (Trainers/Admins Only) -->
     <div class="right-side" *ngIf="userRole !== 'user'">
         <button (click)="toggleCreateMode()">Create Program</button>
 
@@ -36,6 +52,12 @@
         <div *ngFor="let program of programs">
             <h4>{{ program.title }}</h4>
             <button (click)="editProgram(program)">Edit</button>
+
+            <!-- Session Creation Section -->
+            <div>
+                <input type="datetime-local" [(ngModel)]="newSession.date" placeholder="Session Date">
+                <button (click)="createSession(program.id)">Add Session</button>
+            </div>
         </div>
 
         <div *ngIf="isEditing">
